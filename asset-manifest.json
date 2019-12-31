@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/draggable-markers/static/css/main.f45d07e0.chunk.css",
+    "main.js": "/draggable-markers/static/js/main.bcfdf39e.chunk.js",
+    "main.js.map": "/draggable-markers/static/js/main.bcfdf39e.chunk.js.map",
+    "runtime-main.js": "/draggable-markers/static/js/runtime-main.89e535b5.js",
+    "runtime-main.js.map": "/draggable-markers/static/js/runtime-main.89e535b5.js.map",
+    "static/js/2.815ed059.chunk.js": "/draggable-markers/static/js/2.815ed059.chunk.js",
+    "static/js/2.815ed059.chunk.js.map": "/draggable-markers/static/js/2.815ed059.chunk.js.map",
+    "index.html": "/draggable-markers/index.html",
+    "precache-manifest.619bb5b753f65cb806421a6464969bcd.js": "/draggable-markers/precache-manifest.619bb5b753f65cb806421a6464969bcd.js",
+    "service-worker.js": "/draggable-markers/service-worker.js",
+    "static/css/main.f45d07e0.chunk.css.map": "/draggable-markers/static/css/main.f45d07e0.chunk.css.map",
+    "static/js/2.815ed059.chunk.js.LICENSE": "/draggable-markers/static/js/2.815ed059.chunk.js.LICENSE",
+    "static/media/map.png": "/draggable-markers/static/media/map.82481805.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.89e535b5.js",
+    "static/js/2.815ed059.chunk.js",
+    "static/css/main.f45d07e0.chunk.css",
+    "static/js/main.bcfdf39e.chunk.js"
+  ]
+}
