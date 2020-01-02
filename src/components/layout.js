@@ -11,7 +11,8 @@ export default class Layout extends React.Component {
       clientpos: {
         x: 0,
         y: 0
-      }
+      },
+      isDragging: false
     }
   }
 
@@ -20,7 +21,7 @@ export default class Layout extends React.Component {
     markers.push(
       {
         key : markers.length.toString(),
-        coordinate : [e.nativeEvent.offsetY - 15, e.nativeEvent.offsetX - 15]
+        coordinate : [e.nativeEvent.offsetY - this.props.markerSize.height/2, e.nativeEvent.offsetX - this.props.markerSize.width/2]
       }
     );
     this.setState({
@@ -46,24 +47,48 @@ export default class Layout extends React.Component {
       const markers = this.state.markers.slice();
       const clientpos = this.state.clientpos;
       const targetKey = this.state.target;
-      let coordinate = markers.find((item, idx, array)=>{
-        return item.key === targetKey
-      }).coordinate;
+      const idx = markers.findIndex((item)=>{
+        return item.key=== targetKey;
+      });
+      const coordinate = markers[idx].coordinate.slice();
       coordinate[0] += e.clientY - clientpos.y;
       coordinate[1] += e.clientX - clientpos.x;
-      this.setState({
-        markers: markers,
-        clientpos: {
-          y: e.clientY,
-          x: e.clientX
-        }
-      });
+      if (coordinate[0] <= this.state.range.maxY && coordinate[0] >= 0
+        && coordinate[1] <= this.state.range.maxX && coordinate[1] >= 0) {
+        markers[idx].coordinate = coordinate;
+        this.setState({
+          markers: markers,
+          clientpos: {
+            y: e.clientY,
+            x: e.clientX
+          }
+        });
+      } else {
+        this.setState({
+          clientpos: {
+            y: e.clientY,
+            x: e.clientX,
+          },
+          isDragging: false,
+        });
+      }
     };
   }
   
   handleDragEnd = (e) => {
     this.setState({
       isDragging: false,
+    });
+  }
+
+  handleImgLoad = ({target:img}) =>{
+    this.setState({
+      range:{
+        maxY: img.offsetHeight - this.props.markerSize.height,
+        minY: 0,
+        maxX: img.offsetWidth - this.props.markerSize.width,
+        minX: 0
+      }
     });
   }
 
@@ -75,7 +100,7 @@ export default class Layout extends React.Component {
           style={{
             top: marker.coordinate[0] ,
             left: marker.coordinate[1] ,
-            cursor: 'pointer',
+            cursor: (this.state.isDragging)?'move': 'pointer',
           }}
           onMouseDown={(e)=>{this.handleDragStart(e);}}
           onMouseUp={(e)=>{this.handleDragEnd(e);}}
@@ -91,7 +116,7 @@ export default class Layout extends React.Component {
         <div className='layout'
           onMouseMove={(e)=>{this.handleDrag(e);}} 
         >
-          <img src={map} alt='map' onClick={(e)=>{this.handleImgClick(e);}}/>
+          <img src={map} alt='map' onClick={(e)=>{this.handleImgClick(e);}} onLoad={(e)=>{this.handleImgLoad(e)}}/>
           <div>
             {pins}
           </div>
