@@ -3,6 +3,35 @@ import './layout.css';
 import map from './map.png';
 import icon from './marker.png';
 
+const throttle = function(fn, interval){
+  let _self = fn,
+      timer,
+      firstTime = true;
+
+  return function(){
+    let args = arguments,
+        _me = this;
+
+    if (firstTime) {
+      _self.apply(_me, args);
+      return firstTime = false;
+    }
+
+    if (timer) {
+      return false;
+    }
+
+    timer = setTimeout(() => {
+      clearTimeout(timer);
+      timer = null;
+      _self.apply(_me, args);
+
+    }, interval || 500);
+
+  }
+};
+
+
 export default class Layout extends React.Component {
   constructor(props){
     super(props);
@@ -74,7 +103,14 @@ export default class Layout extends React.Component {
       }
     };
   }
+
+  _throttledMouseMove = throttle(this.handleDrag, 20);
   
+  onMouseMove = (e) => {
+    e.persist();
+    this._throttledMouseMove(e);
+  }
+
   handleDragEnd = (e) => {
     this.setState({
       isDragging: false,
@@ -109,12 +145,12 @@ export default class Layout extends React.Component {
        </div>
       );
     })
-
+    //          {/* onMouseMove={(e)=>{this.handleDrag(e);}}  */}
     return (
       <>
         <h3 className='title'>React Draggable Component</h3>
         <div className='layout'
-          onMouseMove={(e)=>{this.handleDrag(e);}} 
+          onMouseMove={this.onMouseMove} 
         >
           <img src={map} alt='map' onClick={(e)=>{this.handleImgClick(e);}} onLoad={(e)=>{this.handleImgLoad(e)}}/>
           <div>
