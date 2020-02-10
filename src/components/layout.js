@@ -104,7 +104,7 @@ export default class Layout extends React.Component {
     };
   }
 
-  _throttledMouseMove = throttle(this.handleDrag, 20);
+  _throttledMouseMove = throttle(this.handleDrag, 10);
   
   onMouseMove = (e) => {
     e.persist();
