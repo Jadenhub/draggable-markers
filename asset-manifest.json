@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/draggable-markers/static/css/main.04361e2c.chunk.css",
-    "main.js": "/draggable-markers/static/js/main.9f658b36.chunk.js",
-    "main.js.map": "/draggable-markers/static/js/main.9f658b36.chunk.js.map",
+    "main.js": "/draggable-markers/static/js/main.d6de5e78.chunk.js",
+    "main.js.map": "/draggable-markers/static/js/main.d6de5e78.chunk.js.map",
     "runtime-main.js": "/draggable-markers/static/js/runtime-main.89e535b5.js",
     "runtime-main.js.map": "/draggable-markers/static/js/runtime-main.89e535b5.js.map",
     "static/js/2.815ed059.chunk.js": "/draggable-markers/static/js/2.815ed059.chunk.js",
     "static/js/2.815ed059.chunk.js.map": "/draggable-markers/static/js/2.815ed059.chunk.js.map",
     "index.html": "/draggable-markers/index.html",
-    "precache-manifest.cfb46566a06e4815449c005a9f6f7bdb.js": "/draggable-markers/precache-manifest.cfb46566a06e4815449c005a9f6f7bdb.js",
+    "precache-manifest.60c27acbb24a8d5e744ec68762916860.js": "/draggable-markers/precache-manifest.60c27acbb24a8d5e744ec68762916860.js",
     "service-worker.js": "/draggable-markers/service-worker.js",
     "static/css/main.04361e2c.chunk.css.map": "/draggable-markers/static/css/main.04361e2c.chunk.css.map",
     "static/js/2.815ed059.chunk.js.LICENSE": "/draggable-markers/static/js/2.815ed059.chunk.js.LICENSE",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.89e535b5.js",
     "static/js/2.815ed059.chunk.js",
     "static/css/main.04361e2c.chunk.css",
-    "static/js/main.9f658b36.chunk.js"
+    "static/js/main.d6de5e78.chunk.js"
   ]
 }
