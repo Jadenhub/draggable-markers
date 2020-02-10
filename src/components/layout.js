@@ -42,6 +42,10 @@ export default class Layout extends React.Component {
       },
       isDragging: false
     }
+    this.markerSize = {
+      height:30,
+      width:30
+    }
   }
 
   handleImgClick = (e) => {
@@ -49,7 +53,7 @@ export default class Layout extends React.Component {
     markers.push(
       {
         key : markers.length.toString(),
-        coordinate : [e.nativeEvent.offsetY - this.props.markerSize.height/2, e.nativeEvent.offsetX - this.props.markerSize.width/2]
+        coordinate : [e.nativeEvent.offsetY - this.markerSize.height/2, e.nativeEvent.offsetX - this.markerSize.width/2]
       }
     );
     this.setState({
@@ -115,9 +119,9 @@ export default class Layout extends React.Component {
   handleImgLoad = ({target:img}) =>{
     this.setState({
       range:{
-        maxY: img.offsetHeight - this.props.markerSize.height,
+        maxY: img.offsetHeight - this.markerSize.height,
         minY: 0,
-        maxX: img.offsetWidth - this.props.markerSize.width,
+        maxX: img.offsetWidth - this.markerSize.width,
         minX: 0
       }
     });
