@@ -48,12 +48,13 @@ export default class Layout extends React.Component {
     }
   }
 
-  handleImgClick = (e) => {
+  handleImgClick = ({nativeEvent:{offsetY, offsetX}}) => {
     const markers = this.state.markers.slice();
+    const {height, width} = this.markerSize;
     markers.push(
       {
         key : markers.length.toString(),
-        coordinate : [e.nativeEvent.offsetY - this.markerSize.height/2, e.nativeEvent.offsetX - this.markerSize.width/2]
+        coordinate : [offsetY -height/2, offsetX -width/2]
       }
     );
     this.setState({
@@ -74,31 +75,30 @@ export default class Layout extends React.Component {
     });
   }
 
-  handleDrag = (e) =>{
+  handleDrag = ({clientX, clientY}) =>{
     const markers = this.state.markers.slice();
-    const clientpos = this.state.clientpos;
-    const targetKey = this.state.target;
+    const {clientpos:{x, y}, target} = this.state
     const idx = markers.findIndex((item)=>{
-      return item.key=== targetKey;
+      return item.key=== target;
     });
     const coordinate = markers[idx].coordinate.slice();
-    coordinate[0] += e.clientY - clientpos.y;
-    coordinate[1] += e.clientX - clientpos.x;
-    if (coordinate[0] <= this.state.range.maxY && coordinate[0] >= 0
-      && coordinate[1] <= this.state.range.maxX && coordinate[1] >= 0) {
+    coordinate[0] += clientY - y;
+    coordinate[1] += clientX - x;
+    if (coordinate[0] <= this.range.maxY && coordinate[0] >= 0
+      && coordinate[1] <= this.range.maxX && coordinate[1] >= 0) {
       markers[idx].coordinate = coordinate;
       this.setState({
         markers: markers,
         clientpos: {
-          y: e.clientY,
-          x: e.clientX
+          y: clientY,
+          x: clientX
         }
       });
     } else {
       this.setState({
         clientpos: {
-          y: e.clientY,
-          x: e.clientX,
+          y: clientY,
+          x: clientX,
         },
         isDragging: false,
       });
@@ -111,37 +111,36 @@ export default class Layout extends React.Component {
     e.persist();
     this._throttledMouseMove(e);
   }
-  handleDragEnd = (e) => {
+  handleDragEnd = () => {
     this.setState({
       isDragging: false,
     });
   }
-  handleImgLoad = ({target:img}) =>{
-    this.setState({
-      range:{
-        maxY: img.offsetHeight - this.markerSize.height,
-        minY: 0,
-        maxX: img.offsetWidth - this.markerSize.width,
-        minX: 0
-      }
-    });
+  handleImgLoad = ({target:{offsetHeight, offsetWidth}}) =>{
+    const {height, width} = this.markerSize
+    this.range = {
+      maxY: offsetHeight - height,
+      minY: 0,
+      maxX: offsetWidth - width,
+      minX: 0
+    }
   }
 
   render(){
-    const markers = this.state.markers;
-    const isDragging = this.state.isDragging;
+    const {markers, isDragging} = this.state;
     const pins =  markers.map((marker, idx)=>{
+      const {key, coordinate} = marker;
       return (
-       <div key={marker.key} className="map-marker"
+       <div key={key} className="map-marker"
           style={{
-            top: marker.coordinate[0] ,
-            left: marker.coordinate[1] ,
-            cursor: (this.state.isDragging)?'move': 'pointer',
+            top: coordinate[0] ,
+            left: coordinate[1] ,
+            cursor: (isDragging)?'move': 'pointer',
           }}
           onMouseDown={(e)=>{this.handleDragStart(e);}}
           onMouseUp={(isDragging)? this.handleDragEnd: null}
         >
-          <img alt='pin' value={marker.key} src={icon}/>
+          <img alt='pin' value={key} src={icon}/>
        </div>
       );
     })
