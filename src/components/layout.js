@@ -76,16 +76,28 @@ export default class Layout extends React.Component {
   }
 
   handleDrag = ({clientX, clientY}) =>{
-    const markers = this.state.markers.slice();
-    const {clientpos:{x, y}, target} = this.state
+    const {
+      markers,
+      clientpos:{x, y}, 
+      target,
+      maxY,
+      maxX
+    } = {
+      markers: this.state.markers.slice(),
+      ...this.state,
+      ...this.range
+    }
+
     const idx = markers.findIndex((item)=>{
       return item.key=== target;
     });
     const coordinate = markers[idx].coordinate.slice();
+    
     coordinate[0] += clientY - y;
     coordinate[1] += clientX - x;
-    if (coordinate[0] <= this.range.maxY && coordinate[0] >= 0
-      && coordinate[1] <= this.range.maxX && coordinate[1] >= 0) {
+    
+    if (coordinate[0] <= maxY && coordinate[0] >= 0
+      && coordinate[1] <= maxX && coordinate[1] >= 0) {
       markers[idx].coordinate = coordinate;
       this.setState({
         markers: markers,
@@ -125,7 +137,7 @@ export default class Layout extends React.Component {
       minX: 0
     }
   }
-
+  
   render(){
     const {markers, isDragging} = this.state;
     const pins =  markers.map((marker, idx)=>{
