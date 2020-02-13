@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0e727de5ff266877087f7300e3f77999",
+    "revision": "e2566706754a13d67af0691eb780d815",
     "url": "/draggable-markers/index.html"
   },
   {
-    "revision": "625d4c4bf31be2369485",
-    "url": "/draggable-markers/static/css/main.04361e2c.chunk.css"
+    "revision": "47a67ad4e4c5089605de",
+    "url": "/draggable-markers/static/css/main.1a9f5c44.chunk.css"
   },
   {
-    "revision": "43c90b14411362ffdfc9",
-    "url": "/draggable-markers/static/js/2.815ed059.chunk.js"
+    "revision": "625b6d501c5529b8cd3d",
+    "url": "/draggable-markers/static/js/2.3acb84c8.chunk.js"
   },
   {
     "revision": "d705cb622423d72c5defbf368ca70dcc",
-    "url": "/draggable-markers/static/js/2.815ed059.chunk.js.LICENSE"
+    "url": "/draggable-markers/static/js/2.3acb84c8.chunk.js.LICENSE"
   },
   {
-    "revision": "625d4c4bf31be2369485",
-    "url": "/draggable-markers/static/js/main.61060ce8.chunk.js"
+    "revision": "47a67ad4e4c5089605de",
+    "url": "/draggable-markers/static/js/main.3593115b.chunk.js"
   },
   {
     "revision": "fb50bc4e7ac4790aa3ff",
